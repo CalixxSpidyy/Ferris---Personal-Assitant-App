@@ -11,6 +11,8 @@ import threading
 import time
 import requests
 from datetime import datetime
+import ctypes
+import pyautogui
 
 # Global variables
 is_listening = False
@@ -50,6 +52,10 @@ def search_youtube(query):
         webbrowser.open(search_url)
     else:
         speak("Sorry, no results found.")
+
+def lock_screen_windows():
+    user32 = ctypes.windll.User32
+    user32.LockWorkStation()
 
 # Function to fetch a random cool fact
 def coolfact():
@@ -121,6 +127,27 @@ def start_countdown(seconds):
     time.sleep(seconds)
     print("Time's up! Alarm!")
     speak("Time's up! Alarm!")
+
+def auto_screenshot():
+    # Function to generate a unique filename by appending a numerical suffix
+    def get_unique_filename(base_name, ext):
+        suffix = 1
+        filename = f"{base_name}.{ext}"
+        while os.path.exists(filename):
+            filename = f"{base_name}_{suffix}.{ext}"
+            suffix += 1
+        return filename
+
+    # Wait for a few seconds to give you time to prepare the screen you want to capture
+    pyautogui.sleep(1)
+
+    # Generate a unique filename for the screenshot
+    filename = get_unique_filename("screenshot", "png")
+
+    # Take a screenshot of the entire screen and save it
+    screenshot = pyautogui.screenshot()
+    screenshot.save(filename)
+    speak("Screenshot saved")
 
 # Function to speak text
 def speak(text):
@@ -205,6 +232,14 @@ def process_command(command):
             speak("Sorry, I couldn't understand the duration for the countdown.")
         except Exception as e:
             print(f"Error during countdown: {e}")
+    elif "shutdown pc" in command:
+       os.system("shutdown /s /t 1")
+    elif "sleep pc" in command:
+       os.system("rundll32.exe powrprof.dll,SetSuspendState 0,1,0")
+    elif "lock pc" in command:
+        lock_screen_windows()
+    elif "screenshot" in command:
+        auto_screenshot()
     else:
         speak("Sorry, I don't know how to do that yet.")
 

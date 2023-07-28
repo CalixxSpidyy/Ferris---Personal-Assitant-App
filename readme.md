@@ -11,11 +11,12 @@ Before running the voice assistant, make sure you have the following packages in
 - `youtube_search`
 - `tkinter`
 - `requests`
+- `pyautogui`
 
 You can install these packages using pip:
 
 ```
-pip install speech_recognition pyttsx3 youtube_search tkinter requests
+pip install speech_recognition pyttsx3 youtube_search tkinter requests pyautogui
 ```
 
 ## How to Use
@@ -59,6 +60,17 @@ Here are some voice commands that you can use with the voice assistant:
 - **Open App**: Say "Open App" followed by the name of the application you want to open. For example, say "Open App Notepad" to open the Notepad application.
 
 - **Countdown**: Set a countdown timer by saying "Countdown" followed by the number of seconds. For example, say "Countdown 10" to set a 10-second countdown timer.
+
+- **Screenshot**: The function to automatically capture a screenshot of the entire screen and save it by saying "screenshot".
+
+- **Lock PC**: The function to put the PC to sleep by saying "lock PC".
+
+- **Sleep PC**: The function to put the PC to sleep by saying "sleep PC".
+
+- **Shutdown PC**: The function to shut down the PC by saying "shutdown PC".
+
+
+
 
 Note: The voice assistant may not recognize certain commands or may have limitations based on the available data and APIs.
 
